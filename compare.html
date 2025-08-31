@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Compare – RuneFlow</title>
+  <link rel="icon" href="assets/favicon.ico" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dark">
+  <header class="nav">
+    <a class="brand" href="/"><img src="assets/logo.png" alt=""> <span>RuneFlow</span></a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="about.html">About</a>
+      <a class="btn" href="mailto:hello@runeflow.ai">Get access</a>
+    </nav>
+    <button class="hamburger" aria-label="Menu" onclick="toggleNav()">☰</button>
+  </header>
+
+  <section class="section">
+    <h1>RuneFlow vs legacy RPA</h1>
+    <p class="lead">Right tool, right weight. Here’s how we stack up:</p>
+
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>RuneFlow</th>
+            <th>UiPath / Automation Anywhere</th>
+            <th>SikuliX / Pulover’s Macro</th>
+            <th>Katalon / Selenium IDE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Install & setup</td>
+            <td>Single download, no heavy runtime</td>
+            <td>Enterprise-scale installers & services</td>
+            <td>Light, DIY</td>
+            <td>Tooling + drivers & browser bindings</td>
+          </tr>
+          <tr>
+            <td>Recording model</td>
+            <td>Image anchors + optional VLM assist</td>
+            <td>Object models, selectors, activities</td>
+            <td>Image anchors</td>
+            <td>DOM locators; code-centric</td>
+          </tr>
+          <tr>
+            <td>Editor</td>
+            <td>Minimal, fast step editor; re-anchor; JSON / .py export</td>
+            <td>Complex studio environments</td>
+            <td>Manual scripting</td>
+            <td>Geared toward QA flows</td>
+          </tr>
+          <tr>
+            <td>Robustness to change</td>
+            <td>Scale-swept OpenCV + uniqueness check; VLM fallback</td>
+            <td>Good when selectors stable; brittle when not</td>
+            <td>Depends on screenshots; no reasoning</td>
+            <td>Strong for web, less for apps/images</td>
+          </tr>
+          <tr>
+            <td>When it shines</td>
+            <td>Fast desktop/web tasks, thin UIs, mixed stacks</td>
+            <td>Large org governance, multi-system orchestrations</td>
+            <td>Hobby/automation tinkering</td>
+            <td>Automated web QA</td>
+          </tr>
+          <tr>
+            <td>Cost & footprint</td>
+            <td>Lean. No platform tax.</td>
+            <td>Enterprise pricing & overhead</td>
+            <td>Free/open-source</td>
+            <td>Free/community tiers</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="tiny dim">Product names are trademarks of their owners. Table is an opinionated overview to help buyers choose the right fit.</p>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="brand"><img src="assets/logo.png" alt=""><strong>RuneFlow</strong></div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="about.html">About</a>
+        <a href="mailto:hello@runeflow.ai">Contact</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
