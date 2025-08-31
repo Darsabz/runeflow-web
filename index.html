@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RuneFlow – Record once. Adapt on the fly.</title>
+  <meta name="description" content="RuneFlow is a lightweight, visual RPA tool that records once and adapts on the fly using image anchors, OpenCV, and optional VLM assistance." />
+  <link rel="preload" href="assets/logo.png" as="image" />
+  <link rel="icon" href="assets/favicon.ico" />
+  <link rel="stylesheet" href="styles.css" />
+  <meta property="og:title" content="RuneFlow" />
+  <meta property="og:description" content="Record once. Adapt on the fly." />
+  <meta property="og:image" content="assets/logo.png" />
+</head>
+<body class="dark">
+  <header class="nav">
+    <a class="brand" href="/">
+      <img src="assets/logo.png" alt="RuneFlow logo" />
+      <span>RuneFlow</span>
+    </a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="compare.html">Compare</a>
+      <a href="about.html">About</a>
+      <a class="btn" href="mailto:hello@runeflow.ai">Join waitlist</a>
+    </nav>
+    <button class="hamburger" aria-label="Menu" onclick="toggleNav()">☰</button>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Record once.<br><span class="accent">Adapt on the fly.</span></h1>
+      <p class="lead">
+        A modern, lightweight RPA studio. Capture steps with image anchors,
+        tune delays, preview & re-anchor, and replay reliably with OpenCV
+        (plus optional VLM reasoning when the UI shifts).
+      </p>
+      <div class="cta">
+        <a class="btn btn-primary" href="mailto:hello@runeflow.ai">Get early access</a>
+        <a class="btn" href="compare.html">See comparisons</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="section">
+    <h2 class="center">Why teams pick RuneFlow</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Anchor-based reliability</h3>
+        <p>Each click captures a small screenshot “anchor”. On replay we match via OpenCV (color, grayscale, edges + scale sweep) for robust targeting.</p>
+      </div>
+      <div class="card">
+        <h3>Adaptable by design</h3>
+        <p>Re-anchor at the cursor, tweak confidence/timeout, set uniqueness margins, and constrain searches with lock-to-window for extra speed.</p>
+      </div>
+      <div class="card">
+        <h3>Editor that respects time</h3>
+        <p>Reorder, duplicate, delete, insert waits, edit per-step delays, and export a portable <code>.py</code> runner. No baggage, no bloat.</p>
+      </div>
+      <div class="card">
+        <h3>Optional VLM assist</h3>
+        <p>When the UI really moves, a configurable Vision-LLM can suggest a click, then mini-verify before acting. You stay in control with a switch.</p>
+      </div>
+      <div class="card">
+        <h3>Fast & local</h3>
+        <p>OpenCV matching runs locally. Runner JSON is normalized with relative assets so playback is portable across machines.</p>
+      </div>
+      <div class="card">
+        <h3>Pragmatic controls</h3>
+        <p>Jitter, slow/fast delay scaling, stubborn search caps, recovery JSON, ESC to stop, and keyboard hold-to-confirm double-clicks for flaky UIs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section alt">
+    <div class="two-col">
+      <div>
+        <h2>How it works</h2>
+        <ol class="steps">
+          <li><strong>Record:</strong> Click/keys are captured with tiny anchor images. F8 stops recording.</li>
+          <li><strong>Refine:</strong> Reorder, insert waits, re-anchor, tweak confidence & timeouts.</li>
+          <li><strong>Run:</strong> Replay with jitter + delay scaling. Optional recovery flows.</li>
+          <li><strong>Export:</strong> One click to a standalone Python runner you can schedule anywhere.</li>
+        </ol>
+        <a class="btn" href="compare.html">Compare to legacy RPA</a>
+      </div>
+      <div>
+        <div class="screen fake">
+          <div class="window-bar"><span></span><span></span><span></span></div>
+          <div class="window-body">
+            <p>RuneFlow UI: step editor, anchors, preview & re-anchor, normalized JSON export.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section center">
+    <h2>Be first in line</h2>
+    <p>We’re onboarding a small wave of early users. If your team wants a faster, leaner RPA that still feels powerful, we’d love to talk.</p>
+    <a class="btn btn-primary" href="mailto:hello@runeflow.ai">Request access</a>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="brand">
+        <img src="assets/logo.png" alt="" />
+        <strong>RuneFlow</strong>
+      </div>
+      <nav>
+        <a href="about.html">About</a>
+        <a href="compare.html">Compare</a>
+        <a href="mailto:hello@runeflow.ai">Contact</a>
+      </nav>
+      <p class="tiny">© <span id="y"></span> RuneFlow. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
