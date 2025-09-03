@@ -1,461 +1,83 @@
 <!-- =============================
-File: index.html (updated)
-Changes:
-- Replaced all “Request early access” CTAs with “Buy Now” linking to checkout.html
-- Added pricing pill ($49.99/mo, was $99.99) where relevant
-- Added “Demos” link in nav (opens in new tab)
-- Kept your content, styles, and hero video intact
-============================== -->
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RuneFlow — Record once. Adapt on the fly.</title>
-  <meta name="description" content="RuneFlow is a lightweight, anchor-based automation tool. Record clicks/keys once; replay reliably with adaptive matching, jitter control, and optional LLM assists." />
-  <meta property="og:title" content="RuneFlow — Record once. Adapt on the fly." />
-  <meta property="og:description" content="Record UI flows once, replay anywhere. Faster than legacy RPA, portable JSON, optional LLM reasoning." />
-  <meta property="og:image" content="https://runeflow.ai/assets/ui-screenshot.png" />
-  <meta property="og:type" content="website" />
-  <link rel="icon" href="/assets/logo.png" type="image/png+xml" />
-  <style>
-    :root{
-      --bg:#0B1118;
-      --panel:#0F1720;
-      --muted:#8aa4b6;
-      --text:#e8eef5;
-      --card:#0e1620;
-      --accent:#63e6be;
-      --accent-2:#6aa3ff;
-      --warn:#ff6b6b;
-      --ring: 0 0 0 2px rgba(99,230,190,.35), 0 10px 30px rgba(0,0,0,.35);
-      --radius:14px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-      background: radial-gradient(1200px 800px at 20% -10%, #14202b 0%, #0b1118 55%);
-      color:var(--text);
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:1160px; margin:0 auto; padding:0 20px}
-    header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter:saturate(150%) blur(8px);
-      background:linear-gradient(180deg, rgba(11,17,24,.85), rgba(11,17,24,.65));
-      border-bottom:1px solid rgba(255,255,255,.05);
-    }
-    .nav{display:flex; align-items:center; gap:14px; padding:14px 0;}
-    .nav img{width:26px; height:26px}
-    .brand{font-weight:700; letter-spacing:.2px}
-    .nav-spacer{flex:1}
-    .nav a.link{color:var(--muted); padding:8px 10px; border-radius:8px}
-    .nav a.link:hover{background:rgba(255,255,255,.04); color:#cfe3ef}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 18px; border-radius:var(--radius); border:0; cursor:pointer;
-      background:linear-gradient(135deg, var(--accent) 0%, #43d3aa 100%);
-      color:#0b1118; font-weight:700; box-shadow: var(--ring); transition: transform .08s ease;
-    }
-    .btn:hover{transform:translateY(-1px)}
-    .btn.alt{background:linear-gradient(135deg, var(--accent-2), #5b93f0); color:#071018}
-    .btn.ghost{background:transparent; border:1px solid rgba(255,255,255,.14); color:#d9e6f2; box-shadow:none}
-    .price-pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(99,230,190,.12); color:#d8f7ee; font-weight:700}
-    .price-pill s{opacity:.6}
-    .hero{padding:70px 0 36px}
-    .hero-grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:32px; align-items:center;}
-    .kicker{color:var(--accent); font-weight:700; margin-bottom:12px; opacity:.9}
-    h1{font-size: clamp(28px, 4vw, 46px); line-height:1.05; margin:0 0 16px 0}
-    .lead{color:#cfdeec; font-size:18px; line-height:1.55; margin-bottom:18px}
-    .cta{display:flex; gap:12px; flex-wrap:wrap}
-    .hero .shot{background:linear-gradient(180deg, rgba(106,163,255,.12), rgba(99,230,190,.10)); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:14px; box-shadow:0 20px 60px rgba(0,0,0,.45);}
-    .hero .shot img{width:100%; height:auto; display:block; border-radius:10px; background:#0b0f14}
-    .stripe{border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.06); background:rgba(255,255,255,.02)}
-    .cards{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; padding:32px 0}
-    .card{background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:18px; box-shadow:0 12px 40px rgba(0,0,0,.35)}
-    .card h3{margin:4px 0 8px 0; font-size:18px}
-    .muted{color:var(--muted)}
-    .section{padding:54px 0}
-    .grid-4{display:grid; grid-template-columns: repeat(4,1fr); gap:16px}
-    .grid-3{display:grid; grid-template-columns: repeat(3,1fr); gap:16px}
-    .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(99,230,190,.12); color:var(--accent); font-weight:700; font-size:13px}
-    .compare{overflow:auto}
-    table{border-collapse:collapse; width:100%}
-    th, td{padding:12px 10px; border-bottom:1px solid rgba(255,255,255,.08); text-align:left; font-size:15px}
-    th{color:#cfe3ef; font-weight:700}
-    td .yes{color:var(--accent)}
-    td .no{color:var(--warn)}
-    footer{padding:30px 0 60px; color:var(--muted)}
-    .foot-grid{display:flex; gap:12px; align-items:center}
-    .foot-grid img{width:18px; height:18px; opacity:.9}
-    @media (max-width: 980px){
-      .hero-grid{grid-template-columns: 1fr; gap:22px}
-      .cards{grid-template-columns: 1fr}
-      .grid-4,.grid-3{grid-template-columns: 1fr}
-    }
-  </style>
-</head>
-<body>
-<header>
-  <div class="wrap nav">
-    <img src="/assets/logo.png" alt="RuneFlow logo">
-    <div class="brand">RuneFlow</div>
-    <div class="nav-spacer"></div>
-    <a class="link" href="#usecases">Use cases</a>
-    <a class="link" href="#why">Why RuneFlow</a>
-    <a class="link" href="#compare">Compare</a>
-    <a class="link" href="#about">About</a>
-    <a class="link" href="./demos.html" target="_blank" rel="noopener">Demos</a>
-    <a class="btn ghost" href="./checkout.html" target="_blank" rel="noopener">Buy Now</a>
-  </div>
-</header>
+<th>RuneFlow</th>
+<th>Legacy RPA Suites</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setup complexity</td>
+<td><span class="yes">Lightweight app + JSON</span></td>
+<td><span class="no">Heavy studio/agents</span></td>
+</tr>
+<tr>
+<td>Selector brittleness</td>
+<td><span class="yes">Anchor-based, scale-aware</span></td>
+<td><span class="no">DOM/XPath fragile</span></td>
+</tr>
+<tr>
+<td>Portability</td>
+<td><span class="yes">Runs anywhere Python runs</span></td>
+<td>Often tied to vendor runtime</td>
+</tr>
+<tr>
+<td>LLM assist (optional)</td>
+<td><span class="yes">Toggle on for reasoning</span></td>
+<td>Usually add-on or unavailable</td>
+</tr>
+<tr>
+<td>Cost profile</td>
+<td><span class="yes">Simple monthly subscription</span></td>
+<td>Per-seat + platform fees</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top:18px">
+<a class="btn alt" href="./checkout.html" target="_blank" rel="noopener">Start a pilot</a>
+</div>
+</section>
 
-<main>
-  <!-- Hero -->
-  <section class="wrap hero">
-    <div class="hero-grid">
-      <div>
-        <div class="kicker">Record once. Adapt on the fly.</div>
-        <h1>Lightweight UI automation that doesn’t break when pixels move.</h1>
-        <p class="lead">
-          RuneFlow captures clicks/keys with tiny anchor images and replays them with adaptive matching.
-          Insert waits, reorder, tweak confidences, and export portable JSON or a runner script.
-          Optionally add LLM reasoning between steps—always under your control.
-        </p>
-        <div class="price-pill">$49.99/mo <s>$99.99</s> • limited-time</div>
-        <div class="cta" style="margin-top:10px">
-          <a class="btn" href="./checkout.html" target="_blank" rel="noopener">Buy Now</a>
-          <a class="btn alt" href="#usecases">See use cases</a>
-        </div>
-      </div>
-      <div class="shot hero">
-        <video autoplay loop muted playsinline controls
-               poster="/assets/ui-screenshot.png"
-               style="width:100%; height:auto; display:block; border-radius:10px; background:#0b0f14">
-          <source src="/assets/Untitled.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </div>
-  </section>
 
-  <!-- Feature cards -->
-  <section class="stripe">
-    <div class="wrap cards">
-      <article class="card">
-        <div class="pill">No brittle selectors</div>
-        <h3>Anchor-based automation</h3>
-        <p class="muted">Record clicks/keys with small image anchors. Replay adapts with scaling + search so flows survive minor UI shifts.</p>
-      </article>
-      <article class="card">
-        <div class="pill" style="background:rgba(106,163,255,.12); color:var(--accent-2)">Fast & portable</div>
-        <h3>Zero-bloat runtime</h3>
-        <p class="muted">Portable JSON, optional standalone runner. Works across machines without heavyweight RPA suites.</p>
-      </article>
-      <article class="card">
-        <div class="pill">LLM-ready</div>
-        <h3>Reasoning between steps</h3>
-        <p class="muted">When UIs change drastically, toggle an LLM assist that proposes a click and mini-verifies before acting.</p>
-      </article>
-    </div>
-  </section>
+<!-- Founder/About -->
+<section id="about" class="wrap section">
+<div class="card" style="padding:22px">
+<h2>About</h2>
+<p class="muted" style="max-width:860px">
+RuneFlow is built by industry-leading AI engineers with experience delivering automation and
+computer-vision systems for teams at Disney, Qualcomm, Netflix, Fox, PayPal, UBS, and more.
+We’re building the fastest way to turn “clicky” workflows into resilient, portable automations.
+</p>
+<div class="cta" style="margin-top:10px">
+<a class="btn" href="./checkout.html" target="_blank" rel="noopener">Buy Now</a>
+<a class="btn ghost" href="#usecases">See use cases</a>
+</div>
+</div>
+</section>
 
-  <!-- Use cases -->
-  <section id="usecases" class="wrap section">
-    <h2>Where teams use RuneFlow</h2>
-    <div class="grid-4" style="margin-top:14px">
-      <div class="card">
-        <h3>QA UI Testing</h3>
-        <p class="muted">Record once, run in CI. Great for smoke tests and flaky-selector apps.</p>
-      </div>
-      <div class="card">
-        <h3>IT Ops Playbooks</h3>
-        <p class="muted">Automate patching steps, admin consoles, and thick-client tools with repeatable flows.</p>
-      </div>
-      <div class="card">
-        <h3>Back-office Tasks</h3>
-        <p class="muted">Invoice uploads, data entry, reporting dashboards—done reliably without custom APIs.</p>
-      </div>
-      <div class="card">
-        <h3>Gaming Macros</h3>
-        <p class="muted">Adaptive, human-like macros that tolerate resolution changes and minor UI differences.</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- Why RuneFlow -->
-  <section id="why" class="wrap section">
-    <h2>Why RuneFlow vs. legacy RPA</h2>
-    <div class="grid-3" style="margin-top:14px">
-      <div class="card">
-        <h3>Lean by design</h3>
-        <p class="muted">No vendor lock-in, no heavy studio. Just record, refine, replay.</p>
-      </div>
-      <div class="card">
-        <h3>Portable artifacts</h3>
-        <p class="muted">Normalized JSON + relative assets mean flows travel across machines and repos cleanly.</p>
-      </div>
-      <div class="card">
-        <h3>Pragmatic controls</h3>
-        <p class="muted">Delay scaling, jitter, stubborn caps, and recovery flows—so loops don’t stall your runs.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Comparison -->
-  <section id="compare" class="wrap section compare">
-    <h2>Side-by-side</h2>
-    <table style="margin-top:14px">
-      <thead>
-        <tr>
-          <th>Capability</th>
-          <th>RuneFlow</th>
-          <th>Legacy RPA Suites</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Setup complexity</td>
-          <td><span class="yes">Lightweight app + JSON</span></td>
-          <td><span class="no">Heavy studio/agents</span></td>
-        </tr>
-        <tr>
-          <td>Selector brittleness</td>
-          <td><span class="yes">Anchor-based, scale-aware</span></td>
-          <td><span class="no">DOM/XPath fragile</span></td>
-        </tr>
-        <tr>
-          <td>Portability</td>
-          <td><span class="yes">Runs anywhere Python runs</span></td>
-          <td>Often tied to vendor runtime</td>
-        </tr>
-        <tr>
-          <td>LLM assist (optional)</td>
-          <td><span class="yes">Toggle on for reasoning</span></td>
-          <td>Usually add-on or unavailable</td>
-        </tr>
-        <tr>
-          <td>Cost profile</td>
-          <td><span class="yes">Simple monthly subscription</span></td>
-          <td>Per-seat + platform fees</td>
-        </tr>
-      </tbody>
-    </table>
-    <div style="margin-top:18px">
-      <a class="btn alt" href="./checkout.html" target="_blank" rel="noopener">Start a pilot</a>
-    </div>
-  </section>
-
-  <!-- Founder/About -->
-  <section id="about" class="wrap section">
-    <div class="card" style="padding:22px">
-      <h2>About</h2>
-      <p class="muted" style="max-width:860px">
-        RuneFlow is built by industry-leading AI engineers with experience delivering automation and
-        computer-vision systems for teams at Disney, Qualcomm, Netflix, Fox, PayPal, UBS, and more.
-        We’re building the fastest way to turn “clicky” workflows into resilient, portable automations.
-      </p>
-      <div class="cta" style="margin-top:10px">
-        <a class="btn" href="./checkout.html" target="_blank" rel="noopener">Buy Now</a>
-        <a class="btn ghost" href="#usecases">See use cases</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="wrap section" style="text-align:center">
-    <h2>Ready to try RuneFlow?</h2>
-    <p class="muted">Get instant access. Monthly subscription.</p>
-    <div class="price-pill" style="justify-content:center; margin:0 auto 8px auto">$49.99/mo <s>$99.99</s></div>
-    <div class="cta" style="justify-content:center">
-      <a class="btn" href="./checkout.html" target="_blank" rel="noopener">Buy Now</a>
-      <a class="btn alt" href="./demos.html" target="_blank" rel="noopener">Watch Demos</a>
-    </div>
-  </section>
+<!-- CTA -->
+<section class="wrap section" style="text-align:center">
+<h2>Ready to try RuneFlow?</h2>
+<p class="muted">Get instant access. Monthly subscription.</p>
+<div class="price-pill" style="justify-content:center; margin:0 auto 8px auto">$49.99/mo <s>$99.99</s></div>
+<div class="cta" style="justify-content:center">
+<a class="btn" href="./checkout.html" target="_blank" rel="noopener">Buy Now</a>
+<a class="btn alt" href="./demos.html" target="_blank" rel="noopener">Watch Demos</a>
+</div>
+</section>
 </main>
 
+
 <footer>
-  <div class="wrap foot-grid">
-    <img src="/assets/logo.png" alt="">
-    <div>© <span id="y"></span> RuneFlow. All rights reserved.</div>
-  </div>
+<div class="wrap foot-grid">
+<img src="/assets/logo.png" alt="">
+<div>© <span id="y"></span> RuneFlow. All rights reserved.</div>
+</div>
 </footer>
 
+
 <script>
-  document.getElementById('y').textContent = new Date().getFullYear();
+document.getElementById('y').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
 
-
-<!-- =============================
-File: checkout.html (new)
-- Simple, clean checkout UI w/ sale pricing
-- Replace the placeholder button logic with your processor (Stripe, LemonSqueezy, etc.)
-============================== -->
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RuneFlow — Checkout</title>
-  <meta name="description" content="Subscribe to RuneFlow for $49.99/month (limited-time; was $99.99)." />
-  <link rel="icon" href="/assets/logo.png" type="image/png+xml" />
-  <style>
-    :root{--bg:#0B1118; --panel:#0F1720; --muted:#8aa4b6; --text:#e8eef5; --card:#0e1620; --accent:#63e6be; --accent-2:#6aa3ff; --radius:14px; --ring:0 0 0 2px rgba(99,230,190,.35), 0 10px 30px rgba(0,0,0,.35)}
-    *{box-sizing:border-box} body{margin:0; font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; background: radial-gradient(1200px 800px at 20% -10%, #14202b 0%, #0b1118 55%); color:var(--text)}
-    .wrap{max-width:780px; margin:0 auto; padding:20px}
-    header{display:flex; align-items:center; gap:12px; padding:16px 0}
-    header img{width:26px; height:26px}
-    a{color:inherit; text-decoration:none}
-    .card{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:22px; box-shadow:0 12px 40px rgba(0,0,0,.35)}
-    h1{font-size:26px; margin:8px 0 0}
-    .muted{color:var(--muted)}
-    .price{display:flex; align-items:baseline; gap:10px; margin:14px 0 6px}
-    .price .now{font-size:28px; font-weight:800}
-    .price .was{opacity:.6; text-decoration:line-through}
-    label{display:block; font-weight:600; margin:12px 0 6px}
-    input{width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,.14); background:#0b1219; color:#e8eef5}
-    .row{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
-    .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:12px 18px; border-radius:var(--radius); border:0; cursor:pointer; background:linear-gradient(135deg, var(--accent) 0%, #43d3aa 100%); color:#0b1118; font-weight:800; box-shadow: var(--ring)}
-    .notice{font-size:12px; color:var(--muted); margin-top:10px}
-    .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(99,230,190,.12); color:#d8f7ee; font-weight:700}
-    .guarantee{display:flex; gap:10px; align-items:center; margin-top:10px; font-size:14px; color:#cfe3ef}
-    .footer{margin:20px 0 40px; color:var(--muted); text-align:center}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <a href="./index.html" title="Back to site"><img src="/assets/logo.png" alt="RuneFlow"></a>
-      <div style="font-weight:700">RuneFlow</div>
-    </header>
-
-    <div class="card">
-      <div class="pill">Monthly subscription</div>
-      <h1>Checkout</h1>
-      <div class="price"><div class="now">$49.99 / month</div> <div class="was">$99.99</div></div>
-      <p class="muted">Limited-time launch pricing. Cancel anytime.</p>
-
-      <form id="pay" onsubmit="event.preventDefault(); fakePay()">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" placeholder="you@company.com" required>
-
-        <label for="name">Name on card</label>
-        <input id="name" name="name" placeholder="Darius Ss" required>
-
-        <div class="row">
-          <div>
-            <label for="cc">Card number</label>
-            <input id="cc" name="cc" inputmode="numeric" placeholder="4242 4242 4242 4242" required>
-          </div>
-          <div>
-            <label for="exp">Expiry (MM/YY)</label>
-            <input id="exp" name="exp" placeholder="12/28" required>
-          </div>
-        </div>
-        <div class="row">
-          <div>
-            <label for="cvc">CVC</label>
-            <input id="cvc" name="cvc" inputmode="numeric" placeholder="123" required>
-          </div>
-          <div>
-            <label for="zip">ZIP</label>
-            <input id="zip" name="zip" inputmode="numeric" placeholder="92629" required>
-          </div>
-        </div>
-
-        <div style="margin-top:16px; display:flex; gap:10px; align-items:center">
-          <button class="btn" type="submit">Start Subscription</button>
-          <div class="guarantee">🔒 Secure • 🔁 Cancel anytime</div>
-        </div>
-        <div class="notice">You will be charged <strong>$49.99</strong> today and then monthly until you cancel.</div>
-      </form>
-    </div>
-
-    <div class="footer">© <span id="y"></span> RuneFlow</div>
-  </div>
-
-<script>
-  function fakePay(){
-    const email = document.getElementById('email').value.trim();
-    alert(`Thanks! If this were live billing, we'd now create a subscription for ${email}. Hook this button to Stripe or your provider.`);
-    window.location.href = './index.html';
-  }
-  document.getElementById('y').textContent = new Date().getFullYear();
-</script>
-</body>
-</html>
-
-
-<!-- =============================
-File: demos.html (new)
-- Opens from nav in a new tab
-- Grid for 4 demo videos (replace sources/posters)
-============================== -->
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RuneFlow — Demos</title>
-  <meta name="description" content="Watch four short demos of RuneFlow in action." />
-  <link rel="icon" href="/assets/logo.png" type="image/png+xml" />
-  <style>
-    :root{--bg:#0B1118; --panel:#0F1720; --muted:#8aa4b6; --text:#e8eef5; --card:#0e1620; --accent:#63e6be; --accent-2:#6aa3ff; --radius:14px}
-    *{box-sizing:border-box} body{margin:0; font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; background: radial-gradient(1200px 800px at 20% -10%, #14202b 0%, #0b1118 55%); color:var(--text)}
-    .wrap{max-width:1160px; margin:0 auto; padding:20px}
-    header{display:flex; align-items:center; gap:12px; padding:16px 0}
-    header img{width:26px; height:26px}
-    a{color:inherit; text-decoration:none}
-    h1{margin:10px 0 0}
-    p.muted{color:var(--muted)}
-    .grid{display:grid; grid-template-columns: repeat(2,1fr); gap:16px; margin-top:16px}
-    .card{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:14px; box-shadow:0 12px 40px rgba(0,0,0,.35)}
-    video{width:100%; height:auto; display:block; border-radius:10px; background:#0b0f14}
-    .cap{margin-top:8px; color:#cfe3ef; font-weight:600}
-    @media (max-width: 900px){.grid{grid-template-columns:1fr}}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <a href="./index.html" title="Back to site"><img src="/assets/logo.png" alt="RuneFlow"></a>
-      <div style="font-weight:700">RuneFlow — Demos</div>
-      <div style="flex:1"></div>
-      <a href="./checkout.html" class="btn" style="padding:10px 14px; border-radius:10px; background:linear-gradient(135deg, var(--accent) 0%, #43d3aa 100%); color:#0b1118; font-weight:800">Buy Now</a>
-    </header>
-
-    <h1>Product demos</h1>
-    <p class="muted">Four quick videos showing “record once, adapt on the fly” across different workflows.</p>
-
-    <div class="grid">
-      <div class="card">
-        <video controls playsinline muted poster="/assets/demo1.png">
-          <source src="/assets/demo1.mp4" type="video/mp4">
-        </video>
-        <div class="cap">Demo 1 — Anchor recording & adaptive replay</div>
-      </div>
-      <div class="card">
-        <video controls playsinline muted poster="/assets/demo2.png">
-          <source src="/assets/demo2.mp4" type="video/mp4">
-        </video>
-        <div class="cap">Demo 2 — Back-office data entry flow</div>
-      </div>
-      <div class="card">
-        <video controls playsinline muted poster="/assets/demo3.png">
-          <source src="/assets/demo3.mp4" type="video/mp4">
-        </video>
-        <div class="cap">Demo 3 — QA smoke test in CI</div>
-      </div>
-      <div class="card">
-        <video controls playsinline muted poster="/assets/demo4.png">
-          <source src="/assets/demo4.mp4" type="video/mp4">
-        </video>
-        <div class="cap">Demo 4 — Gaming macro with jitter control</div>
-      </div>
-    </div>
-  </div>
-</body>
-</html>
