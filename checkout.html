@@ -1,0 +1,54 @@
+<!doctype html>
+<input id="email" name="email" type="email" placeholder="you@company.com" required>
+
+
+<label for="name">Name on card</label>
+<input id="name" name="name" placeholder="Darius Ss" required>
+
+
+<div class="row">
+<div>
+<label for="cc">Card number</label>
+<input id="cc" name="cc" inputmode="numeric" placeholder="4242 4242 4242 4242" required>
+</div>
+<div>
+<label for="exp">Expiry (MM/YY)</label>
+<input id="exp" name="exp" placeholder="12/28" required>
+</div>
+</div>
+<div class="row">
+<div>
+<label for="cvc">CVC</label>
+<input id="cvc" name="cvc" inputmode="numeric" placeholder="123" required>
+</div>
+<div>
+<label for="zip">ZIP</label>
+<input id="zip" name="zip" inputmode="numeric" placeholder="92629" required>
+</div>
+</div>
+
+
+<div style="margin-top:16px; display:flex; gap:10px; align-items:center">
+<button class="btn" type="submit">Start Subscription</button>
+<div class="guarantee">🔒 Secure • 🔁 Cancel anytime</div>
+</div>
+<div class="notice">You will be charged <strong>$49.99</strong> today and then monthly until you cancel.</div>
+</form>
+</div>
+
+
+<div class="footer">© <span id="y"></span> RuneFlow</div>
+</div>
+
+
+<script>
+function fakePay(){
+const email = document.getElementById('email').value.trim();
+alert(`Thanks! If this were live billing, we'd now create a subscription for ${email}. Hook this button to Stripe or your provider.`);
+window.location.href = './index.html';
+}
+document.getElementById('y').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
+
