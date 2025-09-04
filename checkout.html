@@ -1,54 +1,42 @@
 <!doctype html>
-<input id="email" name="email" type="email" placeholder="you@company.com" required>
-
-
-<label for="name">Name on card</label>
-<input id="name" name="name" placeholder="Bob Smith" required>
-
-
-<div class="row">
-<div>
-<label for="cc">Card number</label>
-<input id="cc" name="cc" inputmode="numeric" placeholder="4242 4242 4242 4242" required>
-</div>
-<div>
-<label for="exp">Expiry (MM/YY)</label>
-<input id="exp" name="exp" placeholder="12/28" required>
-</div>
-</div>
-<div class="row">
-<div>
-<label for="cvc">CVC</label>
-<input id="cvc" name="cvc" inputmode="numeric" placeholder="123" required>
-</div>
-<div>
-<label for="zip">ZIP</label>
-<input id="zip" name="zip" inputmode="numeric" placeholder="11111" required>
-</div>
-</div>
-
-
-<div style="margin-top:16px; display:flex; gap:10px; align-items:center">
-<button class="btn" type="submit">Start Subscription</button>
-<div class="guarantee">🔒 Secure • 🔁 Cancel anytime</div>
-</div>
-<div class="notice">You will be charged <strong>$49.99</strong> today and then monthly until you cancel.</div>
-</form>
-</div>
-
-
-<div class="footer">© <span id="y"></span> RuneFlow</div>
-</div>
-
-
-<script>
-function fakePay(){
-const email = document.getElementById('email').value.trim();
-alert(`Thanks! If this were live billing, we'd now create a subscription for ${email}. Hook this button to Stripe or your provider.`);
-window.location.href = './index.html';
-}
-document.getElementById('y').textContent = new Date().getFullYear();
-</script>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout — RuneFlow</title>
+  <meta http-equiv="refresh" content="0; url=https://buy.stripe.com/fZu5kw2yseW0dawbeD6g801">
+  <style>
+    :root{
+      --bg:#0B1118; --panel:#0F1720; --text:#e8eef5; --muted:#8aa4b6;
+      --accent:#63e6be; --accent2:#6aa3ff; --radius:14px;
+    }
+    html,body{height:100%} body{margin:0;background:#0B1118;color:var(--text);font-family:ui-sans-serif,system-ui}
+    .wrap{max-width:680px;margin:0 auto;padding:28px 20px}
+    .card{margin:16vh auto 0;background:var(--panel);border:1px solid rgba(255,255,255,.08);
+          border-radius:var(--radius);padding:24px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+    h1{margin:0 0 8px 0;font-size:28px}
+    p{color:var(--muted);margin:0 0 12px}
+    .btn{display:inline-block;padding:12px 18px;border-radius:var(--radius);font-weight:700;
+         background:linear-gradient(135deg,var(--accent),#43d3aa);color:#0b1118;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .note{margin-top:8px;color:var(--muted);font-size:14px}
+    footer{margin-top:40px;color:var(--muted);text-align:center}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Redirecting to secure checkout…</h1>
+      <p>We use Stripe to process your subscription safely.</p>
+      <a class="btn" href="https://buy.stripe.com/fZu5kw2yseW0dawbeD6g801" rel="noopener">Open Stripe Checkout</a>
+      <div class="note">If nothing happens, click the button above.</div>
+      <noscript><div class="note">JavaScript is disabled—use the button above.</div></noscript>
+    </div>
+    <footer>© <span id="y"></span> RuneFlow</footer>
+  </div>
+  <script>
+    // JS fallback redirect (in case meta refresh is blocked)
+    location.replace("https://buy.stripe.com/fZu5kw2yseW0dawbeD6g801");
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-
